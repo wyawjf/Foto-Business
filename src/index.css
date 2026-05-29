@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Rounded Latin (Nunito) for English/numbers; a complete Simplified-Chinese face (Noto Sans SC)
+     handles ALL Han glyphs so Chinese never splits across fonts. Nunito carries no CJK, so every
+     Chinese character resolves to Noto Sans SC — eliminating the per-character fallback mismatch. */
+  --font-sans: "Nunito", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Nunito", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-serif, Georgia, serif;
+  --font-mono: "Nunito", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-monospace, monospace;
+  
+  --color-gold-50: #fafafa;
+  --color-gold-100: #f4f4f5;
+  --color-gold-500: #0e7a86;
+  --color-gold-600: #0b616b;
+  --color-gold-950: #0f172a;
+}
+
+@layer utilities {
+  .clip-slider {
+    transition: clip-path 0.05s linear;
+  }
+}
+
+/* Custom premium scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(14, 122, 134, 0.18);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(14, 122, 134, 0.35);
+}
+
+/* Luxury Scanning Beam Effect */
+@keyframes scanning {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+.scan-ray {
+  animation: scanning 3s ease-in-out infinite;
+}
+
+/* Delicate Rotate */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.rx-style-tile,
+.rx-style-img,
+.rx-style-label,
+.rx-style-selected,
+.rx-style-shine,
+.rx-style-copy {
+  will-change: transform, opacity;
+}
+
+.rx-style-tile {
+  transform-style: preserve-3d;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+
+.rx-style-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+}
+
+.rx-style-tile.is-active {
+  box-shadow:
+    0 22px 46px rgba(14, 122, 134, 0.24),
+    0 10px 22px rgba(15, 23, 42, 0.14);
+}
+
+.rx-style-tile.is-active::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.72),
+    inset 0 0 38px rgba(255, 255, 255, 0.12);
+}
+
+.swiss-style-tile {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.swiss-style-tile::after {
+  border-radius: 0;
+  box-shadow: inset 0 0 0 1px rgba(229, 231, 235, 1);
+}
+
+.swiss-style-tile.is-active {
+  box-shadow: none;
+}
+
+.swiss-style-tile.is-active::after {
+  box-shadow:
+    inset 0 0 0 2px #080808,
+    inset 0 0 0 5px #ffffff;
+}

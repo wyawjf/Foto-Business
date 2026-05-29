@@ -1,0 +1,10 @@
+{
+  "name": "Foto",
+  "description": "Premium AI visual playground with high-fidelity smart templates, fluid canvas workflows, and secondary point-and-annotate visual refactoring.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

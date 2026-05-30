@@ -4671,210 +4671,95 @@ export default function App() {
               </div>
                 );
               })() : (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 mt-7 items-stretch">
-                {/* LEFT — chosen workflow as the style reference */}
-                <div className="rx-enter relative rounded-2xl overflow-hidden min-h-[480px] bg-[#0c0c0e] select-none">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-12 mt-7 items-start">
+                {/* LEFT — chosen workflow as the style reference (Swiss) */}
+                <section className="rx-enter relative min-h-[480px] lg:min-h-[640px] bg-stone-900 overflow-hidden select-none">
                   <img
                     src={remixGeneratedImage || activeTemplate.originalImage}
                     alt=""
-                    className="rx-hero-img absolute inset-0 w-full h-full object-cover scale-[1.08] opacity-[0.8]"
+                    className={`rx-hero-img absolute inset-0 w-full h-full object-cover scale-[1.04] opacity-90 ${remixGeneratedImage ? '' : 'grayscale-[0.28]'}`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0e] via-[#0c0c0e]/55 to-[#0c0c0e]/10" />
-                  <div className="relative z-10 h-full flex flex-col justify-end gap-4 p-8 md:p-10">
-                    <span className="inline-flex items-center gap-1.5 self-start pl-2.5 pr-3 py-1 rounded-full bg-white/12 border border-white/20 text-white/85 text-[9.5px] font-bold tracking-[0.2em] uppercase backdrop-blur-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/18 to-white/5" />
+                  <div className="absolute inset-x-8 bottom-8 md:inset-x-10 md:bottom-10 z-10 space-y-5">
+                    <span className="inline-flex items-center gap-2 border border-white/42 px-3 py-1.5 text-[10px] font-mono tracking-[0.18em] uppercase text-white">
                       <Sparkles className="w-3 h-3" />
                       {remixGeneratedImage
                         ? (language === 'zh' ? '生成结果' : 'Generated Result')
                         : (language === 'zh' ? '风格参考' : 'Style Reference')}
                     </span>
-                    <div className="space-y-2">
-                      <span className="block text-[10px] font-bold tracking-[0.18em] uppercase text-[#9ed8de]">
-                        {catLabel(activeTemplate.category)}
+                    <div className="space-y-3 max-w-[520px]">
+                      <span className="block text-[10px] font-mono tracking-[0.22em] uppercase text-white/65">
+                        {language === 'zh' ? '商品电商' : 'Product E-Commerce'}
                       </span>
-                      <h2 className="text-2xl md:text-[30px] font-bold tracking-tight text-white leading-[1.1]">
-                        {language === 'zh' ? (activeTemplate.chineseName || activeTemplate.name) : activeTemplate.name}
+                      <h2 className="text-[40px] md:text-[50px] xl:text-[56px] font-black tracking-[-0.045em] leading-[0.92] text-white">
+                        {language === 'zh' ? activeTemplate.chineseName : activeTemplate.name}
                       </h2>
-                      <p className="text-[12.5px] text-white/55 leading-relaxed max-w-md font-light line-clamp-3">
-                        {language === 'zh' ? (activeTemplate.description_zh || activeTemplate.description) : (activeTemplate.description_en || activeTemplate.description)}
+                      <p className="text-[14px] md:text-[15px] text-white/85 leading-relaxed max-w-[460px] font-medium">
+                        {language === 'zh'
+                          ? (activeTemplate.description_zh || activeTemplate.description)
+                          : (activeTemplate.description_en || activeTemplate.description)}
                       </p>
                     </div>
-                    {(language === 'zh' ? activeTemplate.promptSuggestions_zh : activeTemplate.promptSuggestions_en) || activeTemplate.promptSuggestions ? (
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {((language === 'zh' ? activeTemplate.promptSuggestions_zh : activeTemplate.promptSuggestions_en) || activeTemplate.promptSuggestions).slice(0, 3).map((sug, i) => (
-                          <span key={i} className="px-2.5 py-1 rounded-lg bg-white/8 border border-white/10 text-white/70 text-[10.5px] font-medium backdrop-blur-sm">
-                            {sug}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
                   </div>
-                </div>
+                </section>
 
-                {/* RIGHT — upload step */}
+                {/* RIGHT — upload + generate (Swiss) */}
                 {(() => {
                   const dual = remixIsDual(activeTemplate);
-                  const stylePicker = remixHasStylePicker(activeTemplate);
                   const ready = dual ? Boolean(remixUploads[0] && remixUploads[1]) : Boolean(remixUploads[0]);
                   return (
-                <div className="flex flex-col gap-5">
-                  <div className="rx-enter flex items-center gap-3 pt-1">
-                    <span className="w-8 h-8 rounded-lg bg-[#121212] text-white text-sm font-bold flex items-center justify-center shrink-0">1</span>
-                    <div>
-                      <h3 className="text-2xl font-bold tracking-tight text-[#121212] leading-tight">
-                        {stylePicker
-                          ? (language === 'zh' ? '上传一张图片，选择风格变化' : 'Upload one image, choose a style')
-                          : dual
-                            ? (language === 'zh' ? '上传两张图片' : 'Upload two images')
-                            : (language === 'zh' ? '上传你的商品图片' : 'Upload your product')}
+                <section className="rx-enter bg-white min-h-[480px] lg:min-h-[640px] flex flex-col">
+                  <div className="flex items-start gap-5 pb-5 border-b border-stone-200">
+                    <span className="text-[44px] md:text-[50px] font-black tracking-[-0.08em] leading-none text-stone-300">01</span>
+                    <div className="pt-1">
+                      <h3 className="text-[28px] md:text-[32px] font-black tracking-[-0.04em] leading-none text-[#080808]">
+                        {language === 'zh' ? '上传你的商品图片' : 'Upload your product'}
                       </h3>
-                      {stylePicker ? (
-                        <p className="text-[12px] text-stone-400 font-light mt-0.5">
-                          {language === 'zh' ? '旁边选择一个 AI 工作流模板，最后会直接生成该风格图片。' : 'Pick one AI workflow style beside the upload, then generate that visual directly.'}
-                        </p>
-                      ) : dual && (
-                        <p className="text-[12px] text-stone-400 font-light mt-0.5">
-                          {language === 'zh' ? '依次上传需要合成的两张素材图' : 'Add the two source images to combine'}
-                        </p>
-                      )}
+                      <p className="mt-3 text-[13px] leading-relaxed text-stone-500 max-w-[330px]">
+                        {language === 'zh'
+                          ? '上传一张商品去底图，确认无误后一键生成。'
+                          : 'Drop a single product cut-out, then generate.'}
+                      </p>
                     </div>
                   </div>
 
-                  {stylePicker ? (
-                    <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_300px] gap-5 flex-1 items-start">
-                      <div className="flex flex-col gap-2.5">
-                        <div className="rx-enter flex items-center justify-between gap-2">
-                          <span className="text-[12.5px] font-bold text-[#121212] tracking-tight">
-                            {language === 'zh' ? '上传主体图片' : 'Upload subject image'}
-                          </span>
-                          <span className="text-[10px] font-mono text-stone-400">
-                            {language === 'zh' ? '单图输入' : '1 image'}
-                          </span>
-                        </div>
-                        {renderRemixSlot(0, true)}
+                  <div className="pt-6 space-y-5">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between border-b border-stone-200 pb-2">
+                        <span className="text-[12px] font-mono tracking-[0.18em] uppercase text-[#080808]">
+                          {language === 'zh' ? '上传主体' : 'Upload Subject'}
+                        </span>
+                        <span className="text-[11px] font-mono tracking-[0.18em] uppercase text-stone-500">
+                          {dual ? (language === 'zh' ? '双图输入' : 'Dual Input') : (language === 'zh' ? '单图输入' : 'Single Input')}
+                        </span>
                       </div>
-
-                      <div className="rx-enter flex flex-col gap-3.5 min-h-[290px]">
-                        <div className="flex items-end justify-between">
-                          <div>
-                            <span className="text-[9px] font-mono font-bold tracking-[0.24em] uppercase text-[#0e7a86]">
-                              AI Style Deck
-                            </span>
-                            <p className="mt-1 text-[12.5px] font-bold text-[#121212] tracking-tight">
-                              {language === 'zh' ? '选择一种视觉方向' : 'Choose a visual direction'}
-                            </p>
-                          </div>
-                          <div className="w-9 h-9 rounded-full bg-stone-950 text-white flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.22)]">
-                            <Palette className="w-4 h-4" />
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-3">
-                          {WORKFLOW_STYLE_OPTIONS.map((style) => {
-                            const active = selectedRemixStyleId === style.id;
-                            return (
-                              <button
-                                key={style.id}
-                                type="button"
-                                aria-pressed={active}
-                                onMouseEnter={(e) => animateStyleTileHover(e.currentTarget, true)}
-                                onMouseLeave={(e) => animateStyleTileHover(e.currentTarget, false)}
-                                onFocus={(e) => animateStyleTileHover(e.currentTarget, true)}
-                                onBlur={(e) => animateStyleTileHover(e.currentTarget, false)}
-                                onClick={() => setSelectedRemixStyleId(style.id)}
-                                className={`rx-style-tile group relative aspect-square overflow-hidden rounded-[22px] bg-stone-950 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0e7a86]/45 ${active ? 'is-active' : ''}`}
-                              >
-                                <img
-                                  src={style.thumbnail}
-                                  alt={language === 'zh' ? style.name_zh : style.name}
-                                  className="rx-style-img absolute inset-0 w-full h-full object-cover"
-                                />
-                                <div
-                                  className="absolute inset-0 mix-blend-soft-light"
-                                  style={{ background: `linear-gradient(135deg, ${style.accent}88, rgba(0,0,0,0.12) 48%, rgba(255,255,255,0.16))` }}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/12 to-white/5" />
-                                <div className="rx-style-shine pointer-events-none absolute -inset-y-10 -left-1/2 w-1/2 rotate-12 bg-white/55 blur-md opacity-0" />
-                                <div className="absolute left-3 top-3 w-2.5 h-2.5 rounded-full ring-4 ring-white/20" style={{ backgroundColor: style.accent }} />
-
-                                <div className="absolute inset-x-0 bottom-0 p-3">
-                                  <span className="rx-style-label block text-[10.5px] font-bold leading-tight text-white drop-shadow-sm">
-                                    {language === 'zh' ? style.name_zh : style.name}
-                                  </span>
-                                </div>
-
-                                {active && (
-                                  <div className="rx-style-selected absolute right-2.5 top-2.5 w-6 h-6 rounded-full bg-white text-[#121212] flex items-center justify-center shadow-[0_8px_20px_rgba(0,0,0,0.25)]">
-                                    <Check className="w-3.5 h-3.5" strokeWidth={3} />
-                                  </div>
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-
-                        <div className="rx-style-copy pt-1">
-                          <div className="h-px w-full bg-gradient-to-r from-transparent via-stone-200 to-transparent mb-3" />
-                          <div className="flex items-start gap-3">
-                            <span className="mt-1 w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: selectedRemixStyle.accent }} />
-                            <div className="min-w-0">
-                              <p className="text-[12px] font-bold text-[#121212] tracking-tight">
-                                {language === 'zh' ? selectedRemixStyle.name_zh : selectedRemixStyle.name}
-                              </p>
-                              <p className="mt-1 text-[10.5px] leading-relaxed text-stone-400 font-light">
-                                {language === 'zh' ? selectedRemixStyle.description_zh : selectedRemixStyle.description}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      {renderSwissCampaignUploadSlot()}
+                      {dual && <div className="mt-3">{renderRemixSlot(1, true)}</div>}
                     </div>
-                  ) : dual ? (
-                    <div className="grid grid-cols-2 gap-4 flex-1">
-                      <div className="flex flex-col gap-2.5">
-                        <div className="rx-enter flex items-center gap-2">
-                          <span className="w-5 h-5 rounded-md bg-stone-900/90 text-white text-[10px] font-bold flex items-center justify-center">1</span>
-                          <span className="text-[12.5px] font-bold text-[#121212] tracking-tight">
-                            {language === 'zh' ? '图片一' : 'Image 1'}
-                          </span>
-                        </div>
-                        {renderRemixSlot(0, true)}
-                      </div>
-                      <div className="flex flex-col gap-2.5">
-                        <div className="rx-enter flex items-center gap-2">
-                          <span className="w-5 h-5 rounded-md bg-stone-900/90 text-white text-[10px] font-bold flex items-center justify-center">2</span>
-                          <span className="text-[12.5px] font-bold text-[#121212] tracking-tight">
-                            {language === 'zh' ? '图片二' : 'Image 2'}
-                          </span>
-                        </div>
-                        {renderRemixSlot(1, true)}
-                      </div>
-                    </div>
-                  ) : (
-                    renderRemixSlot(0, false)
-                  )}
+                  </div>
 
                   <input ref={remixInputRef} type="file" accept="image/*" className="hidden" onChange={(e) => { acceptRemixFile(remixPickSlotRef.current, e.target.files?.[0]); e.target.value = ''; }} />
                   <input ref={remixCameraInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { acceptRemixFile(remixPickSlotRef.current, e.target.files?.[0]); e.target.value = ''; }} />
 
-                  {remixGeneratedImage || remixIsGenerating ? (
-                    renderGeneratedActions('dark')
-                  ) : (
-                    <button
-                      disabled={!ready}
-                      onClick={generateFromRemix}
-                      className={`rx-enter w-full flex items-center justify-center gap-2.5 py-4 rounded-xl text-sm font-bold tracking-tight transition-all ${
-                        ready
-                          ? 'bg-[#0e7a86] text-white hover:brightness-110 shadow-[0_8px_24px_rgba(14,122,134,0.25)] cursor-pointer'
-                          : 'bg-stone-100 text-stone-400 cursor-not-allowed'
-                      }`}
-                    >
-                      {stylePicker
-                        ? (language === 'zh' ? `直接生成 · ${selectedRemixStyle.name_zh}` : `Generate · ${selectedRemixStyle.name}`)
-                        : (language === 'zh' ? '直接生成图片' : 'Generate Image')}
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
+                  <div className="mt-8">
+                    {remixGeneratedImage || remixIsGenerating ? (
+                      renderGeneratedActions('dark')
+                    ) : (
+                      <button
+                        disabled={!ready}
+                        onClick={generateFromRemix}
+                        className={`w-full flex items-center justify-center gap-2.5 py-4 border text-[12px] font-mono tracking-[0.16em] uppercase transition-all ${
+                          ready
+                            ? 'border-[#080808] bg-[#080808] text-white hover:bg-white hover:text-[#080808] cursor-pointer'
+                            : 'border-stone-200 bg-stone-100 text-stone-400 cursor-not-allowed'
+                        }`}
+                      >
+                        {language === 'zh' ? '生成图片' : 'Generate Image'}
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </section>
                   );
                 })()}
               </div>
